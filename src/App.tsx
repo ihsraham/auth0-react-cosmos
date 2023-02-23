@@ -9,6 +9,7 @@ import { OpenloginAdapter } from "@web3auth/openlogin-adapter";
 import "./App.css";
 // import RPC from './ethersRPC' // for using ethers.js
 import RPC from "./web3RPC"; // for using web3.js
+import CosmosRPC from "./cosmosRPC";
 
 const clientId =
   "BEWE6XW4hc0zKA6X7_jLBm2ZkZmLtgTmSGS0JZbiFxBnHk3jaDnuO1zr5c-8s8eIqM3X_7ZS9E1aaQLvqTDa7OM"; // get from https://dashboard.web3auth.io
@@ -117,7 +118,7 @@ function App() {
       uiConsole("provider not initialized yet");
       return;
     }
-    const rpc = new RPC(provider);
+    const rpc = new CosmosRPC(provider);
     const address = await rpc.getAccounts();
     uiConsole(address);
   };
