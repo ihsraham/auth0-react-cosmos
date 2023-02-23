@@ -1,18 +1,12 @@
-import { useEffect, useState } from "react";
-import { Web3AuthCore } from "@web3auth/core";
-import {
-  WALLET_ADAPTERS,
-  CHAIN_NAMESPACES,
-  SafeEventEmitterProvider,
-} from "@web3auth/base";
-import { OpenloginAdapter } from "@web3auth/openlogin-adapter";
+import {useEffect, useState} from "react";
+import {Web3AuthCore} from "@web3auth/core";
+import {CHAIN_NAMESPACES, SafeEventEmitterProvider, WALLET_ADAPTERS,} from "@web3auth/base";
+import {OpenloginAdapter} from "@web3auth/openlogin-adapter";
 import "./App.css";
-// import RPC from './ethersRPC' // for using ethers.js
-import RPC from "./web3RPC"; // for using web3.js
 import CosmosRPC from "./cosmosRPC";
 
 const clientId =
-  "BEWE6XW4hc0zKA6X7_jLBm2ZkZmLtgTmSGS0JZbiFxBnHk3jaDnuO1zr5c-8s8eIqM3X_7ZS9E1aaQLvqTDa7OM"; // get from https://dashboard.web3auth.io
+  "BEWE6XW4hc0zKA6X7_jLBm2ZkZmLtgTmSGS0JZbiFxBnHk3jaDnuO1zr5c-8s8eIqM3X_7ZS9E1aaQLvqTDa7OM";
 
 function App() {
   const [web3auth, setWeb3auth] = useState<Web3AuthCore | null>(null);
@@ -119,8 +113,8 @@ function App() {
       return;
     }
     const rpc = new CosmosRPC(provider);
-    // const address = await rpc.getAccounts();
-    // uiConsole(address);
+    const address = await rpc.getAccounts();
+    uiConsole(address);
   };
 
   const getBalance = async () => {
@@ -128,7 +122,7 @@ function App() {
       uiConsole("provider not initialized yet");
       return;
     }
-    const rpc = new RPC(provider);
+    const rpc = new CosmosRPC(provider);
     const balance = await rpc.getBalance();
     uiConsole(balance);
   };
@@ -138,7 +132,7 @@ function App() {
       uiConsole("provider not initialized yet");
       return;
     }
-    const rpc = new RPC(provider);
+    const rpc = new CosmosRPC(provider);
     const receipt = await rpc.sendTransaction();
     uiConsole(receipt);
   };
@@ -148,7 +142,7 @@ function App() {
       uiConsole("provider not initialized yet");
       return;
     }
-    const rpc = new RPC(provider);
+    const rpc = new CosmosRPC(provider);
     const signedMessage = await rpc.signMessage();
     uiConsole(signedMessage);
   };
@@ -165,7 +159,7 @@ function App() {
       uiConsole("provider not initialized yet");
       return;
     }
-    const rpc = new RPC(provider);
+    const rpc = new CosmosRPC(provider);
     const privateKey = await rpc.getPrivateKey();
     uiConsole(privateKey);
   };
