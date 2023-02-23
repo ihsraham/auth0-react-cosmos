@@ -12,34 +12,35 @@ export default class CosmosRPC {
 
 
 
-  // async getChainId(): Promise<string> {
-  //   try {
-  //     const client = new StargateClient.connect(this.provider as any);
-  //
-  //     // Get the connected Chain's ID
-  //     const chainId = await client.getChainId();
-  //
-  //     return chainId.toString();
-  //   } catch (error) {
-  //     return error as string;
-  //   }
-  // }
-
-  async getAccounts(): Promise<any> {
+  async getChainId(): Promise<string> {
     try {
-      const client : any = await StargateClient.connect(rpc);
+      const client = await StargateClient.connect(rpc);
 
-      // Get user's Cosmos public address
-      const address = (await client.getAccounts())[0];
-      console.log(address);
+      // Get the connected Chain's ID
+      const chainId = await client.getChainId();
 
-      return address;
+      return chainId.toString();
     } catch (error) {
-      console.log(this.provider);
-      console.log(error);
-      return error;
+      return error as string;
     }
   }
+
+  // async getAccounts(): Promise<any> {
+  //   try {
+  //     const privateKey = await this.provider.request({ method: "private_key"});
+  //     const client : any = await StargateClient.connect(rpc);
+  //
+  //     // Get user's Cosmos public address
+  //     const address = (await client.getAccounts())[0];
+  //     console.log(address);
+  //
+  //     return address;
+  //   } catch (error) {
+  //     console.log(this.provider);
+  //     console.log(error);
+  //     return error;
+  //   }
+  // }
 
   // async getBalance(): Promise<string> {
   //   try {

@@ -109,7 +109,7 @@ function App() {
       uiConsole("provider not initialized yet");
       return;
     }
-    const rpc = new RPC(provider);
+    const rpc = new CosmosRPC(provider);
     const chainId = await rpc.getChainId();
     uiConsole(chainId);
   };
@@ -119,8 +119,8 @@ function App() {
       return;
     }
     const rpc = new CosmosRPC(provider);
-    const address = await rpc.getAccounts();
-    uiConsole(address);
+    // const address = await rpc.getAccounts();
+    // uiConsole(address);
   };
 
   const getBalance = async () => {
@@ -241,7 +241,7 @@ function App() {
 
       <footer className="footer">
         <a
-          href="https://github.com/Web3Auth/examples/tree/main/web-core-sdk/custom-authentication/auth0-react-core-example"
+          href="https://github.com/ihsraham/auth0-react-cosmos"
           target="_blank"
           rel="noopener noreferrer"
         >
