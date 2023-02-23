@@ -233,10 +233,7 @@ function App() {
   return (
     <div className="container">
       <h1 className="title">
-        <a target="_blank" href="http://web3auth.io/" rel="noreferrer">
-          Web3Auth
-        </a>{" "}
-        & ReactJS Example using Auth0
+          ReactJS Example using Twitter Auth0 login
       </h1>
 
       <div className="grid">{provider ? loggedInView : unloggedInView}</div>
