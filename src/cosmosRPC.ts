@@ -10,8 +10,6 @@ export default class CosmosRPC {
     this.provider = provider;
   }
 
-
-
   async getChainId(): Promise<string> {
     try {
       const client = await StargateClient.connect(rpc);
@@ -31,7 +29,6 @@ export default class CosmosRPC {
       const walletPromise = await DirectSecp256k1Wallet.fromKey(privateKey, "cosmos");
       return (await walletPromise.getAccounts())[0].address;
     } catch (error) {
-      console.log(error);
       return error;
     }
   }
@@ -79,7 +76,6 @@ export default class CosmosRPC {
       const height = result.height;
       return { transactionHash, height };
     } catch (error) {
-      console.log(error);
       return error as string;
     }
   }
