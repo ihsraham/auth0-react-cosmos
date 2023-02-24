@@ -2,8 +2,6 @@ import type {SafeEventEmitterProvider} from "@web3auth/base";
 import {SigningStargateClient, StargateClient} from "@cosmjs/stargate";
 import {DirectSecp256k1Wallet, OfflineDirectSigner} from "@cosmjs/proto-signing";
 
-const objEncode = require('object-encode');
-
 const rpc = "rpc.sentry-01.theta-testnet.polypore.xyz:26657";
 export default class CosmosRPC {
   private provider: SafeEventEmitterProvider;
@@ -56,7 +54,6 @@ export default class CosmosRPC {
     try {
       await StargateClient.connect(rpc);
       const privateKey = Buffer.from(await this.getPrivateKey(), 'hex');
-      console.log(typeof(privateKey));
       const walletPromise = await DirectSecp256k1Wallet.fromKey(privateKey, "cosmos");
       const fromAddress = (await walletPromise.getAccounts())[0].address;
 
@@ -78,37 +75,11 @@ export default class CosmosRPC {
             gas: "100000",
           },
       )
-      console.log(result);
-      return result.transactionHash;
+      const transactionHash = result.transactionHash;
+      const height = result.height;
+      return { transactionHash, height };
     } catch (error) {
       console.log(error);
-      return error as string;
-    }
-  }
-
-  async signMessage() {
-    try {
-      await StargateClient.connect(rpc);
-      const privateKey = Buffer.from(await this.getPrivateKey(), 'hex');
-      console.log(typeof(privateKey));
-      const getSignerFromKey = async (): Promise<OfflineDirectSigner> => {
-        return DirectSecp256k1Wallet.fromKey(privateKey,  "cosmos");
-      }
-      const signer: OfflineDirectSigner = await getSignerFromKey();
-
-      const address = (await signer.getAccounts())[0].address;
-
-      const signingClient = await SigningStargateClient.connectWithSigner(rpc, signer);
-      // const defaultGasPrice = GasPrice.fromString('0.025uatom');
-      // const fee : StdFee = calculateFee(80_000, defaultGasPrice);
-      //
-      // let signTx = await signingClient.sign(address, objEncode.encode("YOUR_MESSAGE"), fee, "MEMO");
-      // const signingStargateClient = await SigningStargateClient.offline(signer);
-      // console.log(JSON.stringify(signingStargateClient));
-      const numberPromise = await signingClient.simulate(address, objEncode.encode("YOUR_MESSAGE"), "MEMO");
-      console.log(numberPromise.toString());
-      return numberPromise;
-    } catch (error) {
       return error as string;
     }
   }

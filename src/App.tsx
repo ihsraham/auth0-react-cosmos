@@ -133,18 +133,10 @@ function App() {
       return;
     }
     const rpc = new CosmosRPC(provider);
-    const receipt = await rpc.sendTransaction();
-    uiConsole(receipt);
-  };
-
-  const signMessage = async () => {
-    if (!provider) {
-      uiConsole("provider not initialized yet");
-      return;
-    }
-    const rpc = new CosmosRPC(provider);
-    const signedMessage = await rpc.signMessage();
-    uiConsole(signedMessage);
+    const { transactionHash, height } = await rpc.sendTransaction();
+    const blockExplorerURL = "https://explorer.theta-testnet.polypore.xyz/transactions/" + transactionHash;
+    const txString = "Follow this transaction at " + blockExplorerURL;
+    uiConsole("TxHash: " + transactionHash, "Block Height: " + height, txString);
   };
 
   function uiConsole(...args: any[]): void {
@@ -190,11 +182,6 @@ function App() {
         <div>
           <button onClick={getBalance} className="card">
             Get Balance
-          </button>
-        </div>
-        <div>
-          <button onClick={signMessage} className="card">
-            Sign Message
           </button>
         </div>
         <div>
