@@ -5,6 +5,7 @@
 This tutorial will walk you through the steps to create a simple web application on the Cosmos blockchain and cover the fundamentals of setting up your Web3Auth SDK and Twitter Login using Auth0 for custom authentication.
 
 Repository: https://github.com/ihsraham/auth0-react-cosmos
+
 App hosted on Vercel: https://auth0-react-cosmos-git-new-ihsraham.vercel.app/
 
 ## Quick Start
