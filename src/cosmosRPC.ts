@@ -2,7 +2,7 @@ import type {SafeEventEmitterProvider} from "@web3auth/base";
 import {SigningStargateClient, StargateClient} from "@cosmjs/stargate";
 import {DirectSecp256k1Wallet, OfflineDirectSigner} from "@cosmjs/proto-signing";
 
-const rpc = "rpc.sentry-01.theta-testnet.polypore.xyz:26657";
+const rpc = "https://rpc.sentry-02.theta-testnet.polypore.xyz";
 export default class CosmosRPC {
     private provider: SafeEventEmitterProvider;
 
